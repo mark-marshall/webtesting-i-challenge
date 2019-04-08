@@ -13,11 +13,25 @@ function succeed(item) {
 }
 
 function fail(item) {
+  item.enhancement < 15 && item.durability > 4
+  ? item.durability = item.durability -5
+  : item.enhancement < 15
+  ? item.durability = 0
+  : item.durability
+  
+  item.enhancement >= 15
+  ? item.durability = item.durability -10
+  : item.durability
+
+  item.enhancement > 15
+  ? item.enhancement = item.enhancement -1
+  : item.enhancement
+
   return { ...item };
 }
 
 function repair(item) {
-  item.durability = 20;
+  item.durability = 100;
   return { ...item };
 }
 
