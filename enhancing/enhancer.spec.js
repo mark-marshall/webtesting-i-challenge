@@ -2,7 +2,6 @@ const enhancer = require('./enhancer.js');
 const { succeed, fail, repair, get } = enhancer;
 
 describe('enhance module', () => {
-
   describe('repair fn', () => {
     const testRepairItemOne = {
       name: 'orlando',
@@ -72,6 +71,27 @@ describe('enhance module', () => {
     });
     it('durability does not go below 0', () => {
       expect(fail(testRepairItemSeven).durability).toBe(0);
+    });
+  });
+
+  describe('get fn', () => {
+    const testRepairItemEight = {
+      name: 'orlando',
+      enhancement: 10,
+      durability: 80,
+    };
+
+    const testRepairItemNine = {
+      name: 'mark',
+      enhancement: 0,
+      durability: 5,
+    };
+
+    it('name is preceeded by enhancement level if enchancement is > 0', () => {
+      expect(get(testRepairItemEight).name).toBe('[+10] orlando');
+    });
+    it('name is unchanged if enhancement level is 0', () => {
+      expect(get(testRepairItemNine).name).toBe('mark');
     });
   });
 });
